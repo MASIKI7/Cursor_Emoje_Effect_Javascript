@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Cursor</title>
+        <style>
+             *{
+                margin:0;
+                padding:0;
+                box-sizing:border-box;
+            }
+            body{
+                  background: #111;
+                  min-height:100vh;
+                  overflow: hidden;
+                }
+           span{
+               position:absolute;
+               pointer-events: none;
+               width:10px;
+               height:10px;
+               background:#f00;
+               animation:animate 1s linear infinite;
+           }
+           @keyframes animate{
+               0%{
+                   translate:0 0;
+                   opacity:0; 
+               }
+               10%{
+                   opacity:1;
+               }
+               30%{
+                   translate:0 100px;
+                   opacity:1;
+               }
+               90%{
+                   opacity:1; 
+               }
+              100%{
+                   translate:0 80px;
+                   opacity:0; 
+               }
+           }
+        </style> 
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+       <script>
+           let images = ['😊','😂','😊','❤','😍','😒','👌','😘','🎂','✔','😉','✨','💢','💌','💚'];
+           document.addEventListener('mousemove', function(e){
+               let body = document.querySelector('body');
+               let emoji = document.createElement('span');
+               let x = e.offsetX;
+               let y = e.offsetY;
+
+               let icon = images[Math.floor(Math.random() * images.length)];
+               emoji.innerText = icon;
+               let size = Math.random() * 50;
+               emoji.style.fontSize = 5 + size + "px";
+
+               let max = 0;
+               let min = 200;
+               let randomValue = Math.floor((Math.random() * ((max+1) - min))+min); 
+               emoji.style.transform = 'translateX('+ randomValue+ 'px)';
+
+
+               emoji.style.left = x+"px";
+               emoji.style.top = y+"px";
+
+               body.appendChild(emoji);
+               setTimeout (function(){
+                   emoji.remove();
+               }, 1000)
+           })
+       </script>
+    </body>
+</html>
